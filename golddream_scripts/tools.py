@@ -193,6 +193,10 @@ def get_trade_info(body,show_info=False):
     # 认购日期
     d['认购日期'] = body['body']["orderContractBasic"]['createDate']
 
+
+    d['预计签约日期'] = body['body']["orderContractBasic"]['expectSignDate']
+
+
     try:
 
         d['付款方式'] = body['body']["contractLoan"]['loanName']
@@ -231,7 +235,7 @@ def get_trade_info(body,show_info=False):
     for consultant in body['body']['consultantDetailList']:
         consultant_name_l.append(consultant['consultantName'])
     d['置业顾问'] =  ';'.join(consultant_name_l)
-    
+    d['团队'] = body['body']['consultantDetailList'][0]['salesTeamName']
     name_l = []
     phone_num_l = []
     addr_s = set({})
@@ -357,7 +361,7 @@ def dec_data(data,pro_map_dic=None):
     data['装修总价'] = np.around(data['装修总价'])
     data['毛坯总价'] = data['买卖合同总价'] - data['装修总价']
     
-    data = data[['房间编码','合并房号',"付款方式", '买卖合同总价', '分期名称', '姓名', '建筑面积', '房号', '楼栋', '毛坯总价', '类型',
+    data = data[['房间编码','合并房号','预计签约日期','团队',"付款方式", '买卖合同总价', '分期名称', '姓名', '建筑面积', '房号', '楼栋', '毛坯总价', '类型',
        '置业顾问', '联系地址', '联系电话', '装修总价', '认购日期', '贷款金额', '身份证号码', '项目', '首付金额',
         '合同编号']]
 

@@ -1,0 +1,1 @@
+SUBSTITUTE(MID(B1,FIND("#",B1)-2,2) & "-" & MID(RIGHT(B1,6),FIND("-",RIGHT(B1,6))+1,LEN(RIGHT(B1,6))-1-1),"室","")
